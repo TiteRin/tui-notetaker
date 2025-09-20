@@ -1,0 +1,10 @@
+tasks:
+  dev:
+    command: "astro dev"
+    inputs: ["src/**/*"]
+  build:
+    command: "astro build"
+    inputs: ["src/**/*"]
+    outputs: ["dist"]
+  preview:
+    command: "astro preview"
