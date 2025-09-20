@@ -14,6 +14,10 @@ export default defineConfig({
                     link: '/goals'
                 },
                 {
+                    label: "Proof of Concept",
+                    link: "/poc"
+                },
+                {
                     label: "Decision Records",
                     autogenerate: { directory: "adr" }
                 },
