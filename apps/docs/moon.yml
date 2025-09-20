@@ -1,10 +1,10 @@
 tasks:
   dev:
-    command: "astro dev"
+    command: "npm run dev"
     inputs: ["src/**/*"]
   build:
-    command: "astro build"
+    command: "npm run build"
     inputs: ["src/**/*"]
     outputs: ["dist"]
   preview:
-    command: "astro preview"
+    command: "npm run preview"
