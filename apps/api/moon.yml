@@ -1,5 +1,5 @@
 tasks:
-  serve:
-    command: "php artisan serve"
+  dev:
+    command: "php artisan serve --host=127.0.0.1 --port=8000"
   tests:
     command: "php artisan test"

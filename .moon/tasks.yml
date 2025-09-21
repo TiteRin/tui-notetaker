@@ -1,0 +1,3 @@
+tasks:
+  proxy:
+    command: "caddy run --config ./Caddyfile --adapter caddyfile"

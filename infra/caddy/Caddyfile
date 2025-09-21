@@ -1,0 +1,7 @@
+http://backend.local.test {
+	reverse_proxy local.test:8000
+}
+
+http://docs.local.test {
+	reverse_proxy local.test:4321
+}

@@ -36,7 +36,25 @@ Si je ne peux pas faire de binaire unique, je changerai de tactique.
 
 # Mon MVP
 - Une API qui permet de créer des liens
-- Un CLI qui consomme cette API et qui exporte un fichier .md (vide)
+- Un CLI qui consomme cette API et qui exporte un fichier .md
+
+# Installation
+À vrai dire j’en sais rien. C’est initialisé avec [Moonrepo](https://moonrepo.dev/), mais j’imagine qu’il faut installer le contenu de chaque projet ? Peut-être faut-il que j’ajoute une tâche "install" dans ma config ? Il faudra que j’essaie. 
+
+# Configuration
+Personnellement, j’ai configuré mon /etc/hosts de cette façon:
+```bash
+127.0.0.1 local.test
+127.0.0.1 backend.local.test
+127.0.0.1 docs.local.test
+```
+
+Grâce à Caddy (`moon run caddy:dev`), vous pourrez accéder aux pages avec http://backend.local.test et http://docs.local.test
+
+# Utilisation
+```
+moon run :dev
+```
 
 # Comment m’encourager ?
 

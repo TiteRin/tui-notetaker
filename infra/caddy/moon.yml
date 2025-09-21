@@ -1,0 +1,11 @@
+type: application
+language: bash
+tasks:
+  dev:
+    command: "caddy run --config Caddyfile --adapter caddyfile"
+    local: true
+    inputs: ["Caddyfile"]
+
+  test:
+    command: "caddy validate --config Caddyfile"
+    inputs: ["Caddyfile"]

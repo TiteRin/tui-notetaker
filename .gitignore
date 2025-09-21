@@ -2,6 +2,7 @@
 # moon
 .moon/cache
 .moon/docker
+.prototools
 
 # IDE
 .idea

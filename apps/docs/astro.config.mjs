@@ -4,7 +4,12 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
-	integrations: [
+	vite: {
+        server: {
+            allowedHosts: ["localhost", "docs.local.test",]
+        }
+    },
+    integrations: [
 		starlight({
 			title: 'My Docs',
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/titerin' }],
