@@ -1,0 +1,3 @@
+tasks:
+  daemon:
+    command: daemon.php

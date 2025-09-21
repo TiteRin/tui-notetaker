@@ -1,0 +1,15 @@
+{
+    "name": "idle-rin/cli",
+    "autoload": {
+        "psr-4": {
+            "IdleRin\\Cli\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Marine Lancien",
+            "email": "marine.lancien@protonmail.com"
+        }
+    ],
+    "require": {}
+}
