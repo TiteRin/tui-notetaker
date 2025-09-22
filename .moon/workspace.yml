@@ -4,6 +4,6 @@ $schema: './cache/schemas/workspace.json'
 # extends: './shared/workspace.yml'
 
 projects:
-  api: "apps/api"
+  api: "apps/backend"
   docs: "apps/docs"
   caddy: "infra/caddy"
