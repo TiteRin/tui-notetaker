@@ -83,7 +83,13 @@
         }
     },
     "require-dev": {
-        "pestphp/pest": "^4.1",
-        "symfony/maker-bundle": "^1.64"
+        "dama/doctrine-test-bundle": "^8.3",
+        "doctrine/doctrine-fixtures-bundle": "^4.1",
+        "justinrainbow/json-schema": "^6.5",
+        "phpunit/phpunit": "^12.3",
+        "symfony/browser-kit": "7.3.*",
+        "symfony/css-selector": "7.3.*",
+        "symfony/maker-bundle": "^1.64",
+        "zenstruck/foundry": "^2.7"
     }
 }
