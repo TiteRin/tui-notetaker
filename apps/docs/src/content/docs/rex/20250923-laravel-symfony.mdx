@@ -1,0 +1,45 @@
+---
+title: "Laravel ou Symfony"
+description: "Comment j’ai testé Symfony parce que j’étais bloquée avec Laravel"
+---
+
+# Étape 1 : Situation initiale
+
+J’étais en train de vouloir démarrer mes premières tâches avec Laravel et Pest. Ma première tâche, c’étais créer l’entité Link. Comme je souhaite garder une approche TDD, j’écris mon test, il échoue. Normal.
+
+J’écris donc le code pour accéder à mon API :
+```php
+it("should return a list of links", function() {
+    $this->getJson("/api/links")
+        ->assertOk();
+});
+```
+
+Et là, ça ne fonctionne pas. Erreur **406**. Et je ne trouve rien en lien avec Laravel, Pest, API Platform, etc.
+Donc, quitte à être en phase préparatoire, testons API Platform avec Symfony, comme elle a été créée.
+
+# Étape 2 : Symfony
+
+Branche de test, j’installe Symfony, je suis les documentations sur Symfony et API Platform.
+Je me retrouve dans un environnement que je ne connais pas, donc j’apprends.
+J’apprends à créer ma première ressource, mon Link (qui ne contient qu’une url). API Platform me retourne ma documentation, c’est parfait.
+
+Mais oups! Mon approche TDD ! J’ai oublié d’écrire mon test !
+
+# Étape 3 : PHP Unit
+
+Et là, patatras, il faut revenir à PHPUnit. Cela signifie que je dois de nouveau me lancer dans un apprentissage et désapprendre les raccourcis de Pest.
+Je trouve d’ailleurs le code de PHPUnit très verbeux, très répétitif.
+
+J’ai un premier souci avec KERNEL_CLASS, en somme je plonge dans beaucoup de docs, je recommence beaucoup.
+
+J’écris donc ma classe de test, j’ai réussi à créer ma Factory, à seeder ma base.
+Et mon test passe au vert.
+Youpi.
+
+Donc, est-ce que ça veut dire que je vais passer à Symfony ?
+
+# Étape 4 : Conclusion
+
+Je garde ma branche Symfony au cas où, mais j’ai envie de ne pas m’éparpiller trop vite. Donc je vais continuer avec Laravel, en espérant que cela fonctionne.
+Je dois toujours régler mon souci de test avec Pest, mais je croise les doigts !

@@ -15,7 +15,6 @@ Cette page liste les étapes à réaliser pour développer **MonApp**, une appli
 - [ ] Définir les workspaces :
   - [x] `apps/api`
   - [x] `apps/docs`
-  - [ ] `apps/cli`
   - [ ] `apps/tui`
   - [ ] `libs/domain`
   - [ ] `libs/infra`
@@ -27,19 +26,17 @@ Cette page liste les étapes à réaliser pour développer **MonApp**, une appli
 - [x] Installer **Laravel**
 - [x] Ajouter **API Platform (compat Laravel)**
 - [x] Configurer **SQLite** par défaut
-- [ ] Créer un modèle simple (`Book`)
+- [x] Créer un modèle simple (`Link`)
 
 ---
 
-## CLI
-
-- [ ] Ajouter un CLI (**Symfony Console** ou **Node Commander.js**)
-- [ ] Commande `books:list` consommant l’API (HTTP)
-- [ ] Vérification & lancement auto du daemon (**lazy mode**)
+## CLI / Backend
+- [ ] Rester sur Laravel pour la partie CLI
+- [ ] Permettre de lister et d’ajouter des liens
 
 ---
 
-## TUI
+## TUI Découplé
 
 - [ ] Ajouter un TUI (**Ink.js** ou **php-school/cli-menu**)
 - [ ] Naviguer dans la liste des livres
