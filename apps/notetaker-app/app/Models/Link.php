@@ -19,21 +19,32 @@ class Link extends Model
     public static function booted(): void
     {
         static::creating(function (Link $link) {
-            if (empty($link->url)) {
-                throw new InvalidArgumentException("URL cannot be empty");
-            }
+            $link->validate();
+        });
 
-            if (! filter_var($link->url, FILTER_VALIDATE_URL)) {
-                throw new InvalidArgumentException("Invalid URL: {$link->url}");
-            }
+        static::updating(function (Link $link) {
+            $link->validate();
         });
     }
 
-    public function getId() {
+    protected function validate(): void
+    {
+        if (empty($this->url)) {
+            throw new InvalidArgumentException("URL cannot be empty");
+        }
+
+        if (!filter_var($this->url, FILTER_VALIDATE_URL)) {
+            throw new InvalidArgumentException("Invalid URL: $this->url");
+        }
+    }
+
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function getUrl() {
+    public function getUrl()
+    {
         return $this->url;
     }
 }

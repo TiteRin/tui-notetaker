@@ -2,7 +2,7 @@
 - [x] A Link should have an URL
 - [x] The URL should be validate
 - [x] You should be able to create a Link with a valid URL
-- [ ] You should be able to edit a Link with a valid URL
+- [x] You should be able to edit a Link with a valid URL
 - [ ] You should be able to delete a Link
 
 # URL Value Object
