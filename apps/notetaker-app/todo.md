@@ -1,9 +1,15 @@
 # Links
-- [ ] A Link should have an URL
-- [ ] The URL should be validate
-- [ ] You should be able to create a Link with a valid URL
+- [x] A Link should have an URL
+- [x] The URL should be validate
+- [x] You should be able to create a Link with a valid URL
 - [ ] You should be able to edit a Link with a valid URL
 - [ ] You should be able to delete a Link
+
+# URL Value Object
+- [ ] Create a ValueObject representing a URL
+- [ ] Move the validation and tests 
+- [ ] Link will use the URL Object
+- [ ] Create a URLCast I guess ?
 
 # Directory
 - [ ] A Directory should have a name
