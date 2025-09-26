@@ -6,7 +6,7 @@
 - [x] You should be able to delete a Link
 
 # URL Value Object
-- [ ] Create a ValueObject representing a URL
+- [x] Create a ValueObject representing a URL
 - [ ] Move the validation and tests 
 - [ ] Link will use the URL Object
 - [ ] Create a URLCast I guess ?
