@@ -11,7 +11,7 @@ uses(RefreshDatabase::class);
 it("should have a url", function () {
     $url = fake()->url();
     $link = Link::factory()->make(['url' => $url]);
-    expect($link->url)->toBe($url);
+    expect($link->url)->toEqual($url);
 });
 
 it("should throw an exception when the url is empty", function () {
@@ -26,7 +26,7 @@ it("should create a Link with a valid URL", function () {
     $link = Link::factory()->create(['url' => 'http://google.com']);
     expect($link)->toBeInstanceOf(Link::class)
         ->and($link->id)->not->toBeNull()
-        ->and($link->url)->toBe('http://google.com');
+        ->and($link->url)->toEqual('http://google.com');
 });
 
 describe("when updating a Link", function() {
@@ -48,7 +48,7 @@ describe("when updating a Link", function() {
         $this->link->update(['url' => 'http://example.com']);
         expect($this->link)->toBeInstanceOf(Link::class)
             ->and($this->link->id)->toBe($id)
-            ->and($this->link->url)->toBe('http://example.com');
+            ->and($this->link->url)->toEqual('http://example.com');
     });
 });
 

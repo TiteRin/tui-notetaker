@@ -6,7 +6,8 @@ use InvalidArgumentException;
 
 final class Url
 {
-    public function __construct(private readonly string $url) {
+    public function __construct(public readonly string $url)
+    {
         $this->validate($url);
     }
 

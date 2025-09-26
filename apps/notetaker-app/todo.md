@@ -7,9 +7,9 @@
 
 # URL Value Object
 - [x] Create a ValueObject representing a URL
-- [ ] Move the validation and tests 
-- [ ] Link will use the URL Object
-- [ ] Create a URLCast I guess ?
+- [x] Move the validation and tests 
+- [x] Link will use the URL Object
+- [x] Create a URLCast I guess ?
 
 # Directory
 - [ ] A Directory should have a name
