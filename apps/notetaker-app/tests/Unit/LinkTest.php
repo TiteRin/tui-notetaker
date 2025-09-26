@@ -51,3 +51,15 @@ describe("when updating a Link", function() {
             ->and($this->link->url)->toBe('http://example.com');
     });
 });
+
+describe("When deleting a Link", function() {
+
+    beforeEach(function() {
+        $this->link = Link::factory()->create(['url' => 'http://google.com']);
+    });
+
+    it("should delete from the database", function() {
+        $this->link->delete();
+        expect(Link::count())->toBe(0);
+    });
+});
