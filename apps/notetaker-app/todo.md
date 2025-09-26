@@ -4,12 +4,19 @@
 - [x] You should be able to create a Link with a valid URL
 - [x] You should be able to edit a Link with a valid URL
 - [x] You should be able to delete a Link
+- [ ] A Link should belongs to a Directory
+- [ ] A Directory shouldn’t have two Links with the same URL
 
 # URL Value Object
 - [x] Create a ValueObject representing a URL
 - [x] Move the validation and tests 
 - [x] Link will use the URL Object
 - [x] Create a URLCast I guess ?
+
+# Links / CLI 
+- [x] Add a Link : php notetaker-app links:add [url]
+- [ ] List links : php notetaker-app links:list
+- [ ] Delete links : php notetaker-app links:rm [id|url]
 
 # Directory
 - [ ] A Directory should have a name
