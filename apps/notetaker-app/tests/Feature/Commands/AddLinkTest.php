@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Link;
-use App\ValueObjects\Url;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
