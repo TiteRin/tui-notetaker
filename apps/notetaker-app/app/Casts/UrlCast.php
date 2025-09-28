@@ -14,7 +14,7 @@ class UrlCast implements CastsAttributes
 
     public function set($model, string $key, mixed $value, array $attributes): string
     {
-        $url = $value instanceof Url ? $value->url : new Url($value);
+        $url = $value instanceof Url ? $value : new Url($value);
         return $url->url;
     }
 }

@@ -16,7 +16,7 @@
 # Links / CLI 
 - [x] Add a Link : php notetaker-app links:add [url]
 - [x] List links : php notetaker-app links:list
-- [ ] Delete links : php notetaker-app links:rm [id|url]
+- [x] Delete links : php notetaker-app links:rm [id|url]
 
 # Directory
 - [ ] A Directory should have a name
