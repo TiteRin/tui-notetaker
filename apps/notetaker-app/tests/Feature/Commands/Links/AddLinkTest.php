@@ -1,6 +1,6 @@
 <?php
+namespace Tests\Feature\Commands\Links;
 
-use App\Models\Link;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
