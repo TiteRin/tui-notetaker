@@ -4,10 +4,10 @@ namespace App\Models;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Casts\UrlCast;
-use App\ValueObjects\Url;
 use Database\Factories\LinkFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[ApiResource]
 class Link extends Model
@@ -29,5 +29,10 @@ class Link extends Model
     public function getUrl()
     {
         return $this->url;
+    }
+
+    public function directory(): BelongsTo
+    {
+        return $this->belongsTo(Directory::class);
     }
 }

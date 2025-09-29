@@ -19,4 +19,21 @@ describe("When creating a directory", function () {
             ->and($directory->id)->toBeOne()
             ->and($directory->name)->toBe("Folder");
     });
+
+    it("should be possible to rename a Directory", function() {
+        $directory = Directory::create(['name' => 'Folder']);
+
+        $directory->name = "Folder 2";
+        $directory->save();
+
+        expect($directory)->toBeInstanceOf(Directory::class)
+            ->and($directory->id)->toBeOne()
+            ->and($directory->name)->toBe("Folder 2");
+    });
+
+    it("should be possible to delete a Directory", function() {
+        $directory = Directory::create(['name' => 'Folder']);
+        $directory->delete();
+        expect(Directory::count())->toBe(0);
+    });
 });

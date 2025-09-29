@@ -2,37 +2,50 @@
 
 namespace Tests\Feature;
 
+use App\Models\Directory;
 use App\Models\Link;
+use Exception;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use InvalidArgumentException;
 
 uses(RefreshDatabase::class);
 
-it("should have a url", function () {
-    $url = fake()->url();
-    $link = Link::factory()->make(['url' => $url]);
-    expect($link->url)->toEqual($url);
+describe("Initialization", function () {
+
+    it("should have a url", function () {
+        $url = fake()->url();
+        $link = Link::factory()->make(['url' => $url]);
+        expect($link->url)->toEqual($url);
+    });
+
+    it("should throw an exception when the url is empty", function () {
+        Link::factory()->create(['url' => '']);
+    })->throws(InvalidArgumentException::class, "URL cannot be empty");
+
+    it("should throw an exception if the url is not valid", function () {
+        Link::factory()->create(['url' => 'not-a-url']);
+    })->throws(InvalidArgumentException::class, "Invalid URL: not-a-url");
+
+    it("should throw an exception if there’s no Directory", function() {
+        $link = Link::factory()->create(['url' => 'http://google.com']);
+    })->throws(Exception::class);
+
+    it("should create a Link with a valid URL", function () {
+        $link = Link::factory()
+            ->forDirectory(["name" => "Folder"])
+            ->create(['url' => 'http://google.com']);
+        expect($link)->toBeInstanceOf(Link::class)
+            ->and($link->id)->not->toBeNull()
+            ->and($link->url)->toEqual('http://google.com');
+    });
 });
 
-it("should throw an exception when the url is empty", function () {
-    Link::factory()->create(['url' => '']);
-})->throws(InvalidArgumentException::class, "URL cannot be empty");
+describe("when updating a Link", function () {
 
-it("should throw an exception if the url is not valid", function () {
-    Link::factory()->create(['url' => 'not-a-url']);
-})->throws(InvalidArgumentException::class, "Invalid URL: not-a-url");
-
-it("should create a Link with a valid URL", function () {
-    $link = Link::factory()->create(['url' => 'http://google.com']);
-    expect($link)->toBeInstanceOf(Link::class)
-        ->and($link->id)->not->toBeNull()
-        ->and($link->url)->toEqual('http://google.com');
-});
-
-describe("when updating a Link", function() {
-
-    beforeEach(function() {
-        $this->link = Link::factory()->create(['url' => 'http://google.com']);
+    beforeEach(function () {
+        $this->link = Link::factory()
+            ->forDirectory(['name' => 'Folder'])
+            ->create(['url' => 'http://google.com']);
     });
 
     it("should throw an exception when the url is empty", function () {
@@ -52,13 +65,15 @@ describe("when updating a Link", function() {
     });
 });
 
-describe("When deleting a Link", function() {
+describe("When deleting a Link", function () {
 
-    beforeEach(function() {
-        $this->link = Link::factory()->create(['url' => 'http://google.com']);
+    beforeEach(function () {
+        $this->link = Link::factory()
+            ->forDirectory(['name' => 'Folder'])
+            ->create(['url' => 'http://google.com']);
     });
 
-    it("should delete from the database", function() {
+    it("should delete from the database", function () {
         $this->link->delete();
         expect(Link::count())->toBe(0);
     });
