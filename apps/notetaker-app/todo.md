@@ -19,7 +19,7 @@
 - [x] Delete links : php notetaker-app links:rm [id|url]
 - [x] Add a link with a directory : php notetaker-app links:add [url] --directory [directory]
 - [ ] Move a Link from a directory to another one : php notetake-app links:move [id] --directory [directory]
-- [ ] List Directory : php notetatker-app directories:list
+- [ ] List Directory : php notetaker-app directories:list
 - [ ] List Links for a Directory : php notetaker-app links:list --directory [directory]
 
 # Directory
