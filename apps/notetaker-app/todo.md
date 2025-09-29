@@ -4,7 +4,7 @@
 - [x] You should be able to create a Link with a valid URL
 - [x] You should be able to edit a Link with a valid URL
 - [x] You should be able to delete a Link
-- [ ] A Link should belongs to a Directory
+- [x] A Link should belongs to a Directory
 - [ ] A Directory shouldn’t have two Links with the same URL
 
 # URL Value Object
@@ -19,12 +19,12 @@
 - [x] Delete links : php notetaker-app links:rm [id|url]
 - [x] Add a link with a directory : php notetaker-app links:add [url] --directory [directory]
 - [ ] Move a Link from a directory to another one : php notetake-app links:move [id] --directory [directory]
-- [ ] List Directory : php notetaker-app directories:list
+- [x] List Directory : php notetaker-app directories:list
 - [ ] List Links for a Directory : php notetaker-app links:list --directory [directory]
 
 # Directory
 - [x] A Directory should have a name
-- [ ] A Directory can have 0, 1 or multiple Links
+- [x] A Directory can have 0, 1 or multiple Links
 - [x] A Link should belong to 1 Directory
 - [x] You should be able to create a Directory
 - [x] You should be able to rename a Directory

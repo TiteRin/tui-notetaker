@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands\Directories;
 
+use App\Models\Directory;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class ListDirectories extends Command
 {
@@ -25,7 +27,27 @@ class ListDirectories extends Command
      */
     public function handle()
     {
-        $this->info("No directory found.");
+        $directories = Directory::all();
+
+        if ($directories->count() === 0) {
+            $this->info("No directory found.");
+            return Command::SUCCESS;
+        }
+
+        $count = $directories->count();
+        $plural = Str::plural("directory", $count, prependCount: true);
+
+        $this->info("$plural found.");
+        $this->table(
+            ["ID", "Name", "# Links"],
+            $directories->map(function(Directory $directory) {
+                return [
+                    $directory->id,
+                    $directory->name,
+                    $directory->links()->count()
+                ];
+            })
+        );
         return Command::SUCCESS;
     }
 }

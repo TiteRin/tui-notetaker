@@ -5,6 +5,7 @@ namespace App\Models;
 use Database\Factories\DirectoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Directory extends Model
 {
@@ -25,5 +26,9 @@ class Directory extends Model
 
     public function getIconAndName() {
         return "$this->icon $this->name";
+    }
+
+    public function links(): HasMany {
+        return $this->hasMany(Link::class);
     }
 }

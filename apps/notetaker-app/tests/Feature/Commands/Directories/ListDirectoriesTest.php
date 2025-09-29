@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Commands\Directories;
 
+use App\Models\Directory;
+use App\Models\Link;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -14,29 +16,28 @@ describe("List Directories", function () {
             ->assertSuccessful();
     });
 
-//    it("should return the number of links", function () {
-//
-//        Link::factory()->create(["url" => "https://google.com"]);
-//        Link::factory()->create(["url" => "https://google.com"]);
-//        Link::factory()->create(["url" => "https://google.com"]);
-//
-//        $this->artisan("links:list")
-//            ->expectsOutput("3 links found")
-//            ->assertSuccessful();
-//    });
-//
-//    it("should return an array of links", function () {
-//        Link::factory()->create(["url" => "https://google.com"]);
-//        Link::factory()->create(["url" => "https://example.com"]);
-//        Link::factory()->create(["url" => "https://localhost"]);
-//
-//        $this->artisan("links:list")
-//            ->expectsTable(
-//                ["ID", "Url"], [
-//                [1, "https://google.com"],
-//                [2, "https://example.com"],
-//                [3, "https://localhost"],
-//            ])
-//            ->assertSuccessful();
-//    });
+    it("should return the number of directories", function () {
+
+        Directory::factory()->count(3)->create();
+
+        $this->artisan("directories:list")
+            ->expectsOutput("3 directories found.")
+            ->assertSuccessful();
+    });
+
+    it("should return an array of directories", function () {
+
+        $default = Directory::create(["name" => "Default"]);
+        Link::factory()->count(3)->forDirectory(["name" => "Test"])->create();
+        Link::factory()->count(5)->forDirectory(["name" => "Cat"])->create();
+
+        $this->artisan("directories:list")
+            ->expectsTable(
+                ["ID", "Name", "# Links"], [
+                    ["1", "Default", "0"],
+                    ["2", "Test", "3"],
+                    ["3", "Cat", "5"],
+            ])
+            ->assertSuccessful();
+    });
 });
