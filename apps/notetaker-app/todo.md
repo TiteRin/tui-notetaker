@@ -21,6 +21,7 @@
 - [ ] Move a Link from a directory to another one : php notetake-app links:move [id] --directory [directory]
 - [x] List Directory : php notetaker-app directories:list
 - [ ] List Links for a Directory : php notetaker-app links:list --directory [directory]
+- [ ] Remove empty directories : php notetaker-app directories:prune
 
 # Directory
 - [x] A Directory should have a name
