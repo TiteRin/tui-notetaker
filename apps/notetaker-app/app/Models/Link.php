@@ -15,7 +15,7 @@ class Link extends Model
     /** @use HasFactory<LinkFactory> */
     use HasFactory;
 
-    protected $fillable = ['url'];
+    protected $fillable = ['url', 'directory'];
 
     protected $casts = [
         'url' => UrlCast::class,

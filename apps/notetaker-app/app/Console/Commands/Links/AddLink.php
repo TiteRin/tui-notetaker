@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\Links;
 
+use App\Models\Directory;
 use App\Models\Link;
 use App\ValueObjects\Url;
 use Exception;
@@ -37,14 +38,19 @@ class AddLink extends Command
                 return Command::FAILURE;
             }
 
-            $link = Link::create(['url' => $url]);
+            $directory = Directory::firstOrCreate(['name' => $directory]);
+
+            $link = new Link();
+            $link->url = $url;
+            $link->directory()->associate($directory);
+            $link->save();
         }
         catch(Exception $e) {
             $this->error($e->getMessage());
             return Command::FAILURE;
         }
 
-        $this->info("Link added [$link->id] $link->url");
+        $this->info("Link added [$link->id] $link->url [{$link->directory->getIconAndName()}]");
         return Command::SUCCESS;
     }
 }

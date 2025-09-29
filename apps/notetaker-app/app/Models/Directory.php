@@ -11,6 +11,8 @@ class Directory extends Model
     /** @use HasFactory<DirectoryFactory> */
     use HasFactory;
 
+    private $icon = "📂";
+
     protected $fillable = ['name'];
 
     public function getId() {
@@ -19,5 +21,9 @@ class Directory extends Model
 
     public function getName() {
         return $this->name;
+    }
+
+    public function getIconAndName() {
+        return "$this->icon $this->name";
     }
 }
