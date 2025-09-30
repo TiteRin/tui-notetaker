@@ -17,9 +17,9 @@ describe("List links", function () {
 
     it("should return the number of links", function () {
 
-        Link::factory()->create(["url" => "https://google.com"]);
-        Link::factory()->create(["url" => "https://google.com"]);
-        Link::factory()->create(["url" => "https://google.com"]);
+        Link::factory()->forDirectory(['name' => 'Folder'])->create(["url" => "https://google.com"]);
+        Link::factory()->forDirectory(['name' => 'Folder'])->create(["url" => "https://google.com"]);
+        Link::factory()->forDirectory(['name' => 'Folder'])->create(["url" => "https://google.com"]);
 
         $this->artisan("links:list")
             ->expectsOutput("3 links found")
@@ -27,9 +27,9 @@ describe("List links", function () {
     });
 
     it("should return an array of links", function () {
-        Link::factory()->create(["url" => "https://google.com"]);
-        Link::factory()->create(["url" => "https://example.com"]);
-        Link::factory()->create(["url" => "https://localhost"]);
+        Link::factory()->forDirectory(['name' => 'Folder'])->create(["url" => "https://google.com"]);
+        Link::factory()->forDirectory(['name' => 'Folder'])->create(["url" => "https://example.com"]);
+        Link::factory()->forDirectory(['name' => 'Folder'])->create(["url" => "https://localhost"]);
 
         $this->artisan("links:list")
             ->expectsTable(

@@ -15,7 +15,7 @@ it("should send an error if trying to delete a non existing link", function () {
 
 it("should display the link and ask for confirmation", function () {
 
-    $link = Link::factory()->create(['url' => 'http://google.com']);
+    $link = Link::factory()->forDirectory(['name' => 'Folder'])->create(['url' => 'http://google.com']);
 
     $this->artisan("links:delete", ["id" => $link->id])
         ->expectsConfirmation("You’re about to delete the link $link->url. Are you sure you want to delete it? [Y/n]")
@@ -23,7 +23,7 @@ it("should display the link and ask for confirmation", function () {
 });
 
 it("when cancelling, link should not be deleted", function () {
-    $link = Link::factory()->create(['url' => 'http://google.com']);
+    $link = Link::factory()->forDirectory(['name' => 'Folder'])->create(['url' => 'http://google.com']);
 
     $this->artisan("links:delete", ["id" => $link->id])
         ->expectsConfirmation("You’re about to delete the link $link->url. Are you sure you want to delete it? [Y/n]", "no")
@@ -32,7 +32,7 @@ it("when cancelling, link should not be deleted", function () {
 });
 
 it("when confirming, link should be deleted", function () {
-    $link = Link::factory()->create(['url' => 'http://google.com']);
+    $link = Link::factory()->forDirectory(['name' => 'Folder'])->create(['url' => 'http://google.com']);
 
     $this->artisan("links:delete", ["id" => $link->id])
         ->expectsConfirmation("You’re about to delete the link $link->url. Are you sure you want to delete it? [Y/n]", "yes")

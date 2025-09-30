@@ -14,7 +14,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('links', function (Blueprint $table) {
-            $table->foreignIdFor(Directory::class)->after('url');
+            $table->foreignIdFor(Directory::class)
+                ->constrained()
+                ->restrictOnDelete()
+                ->after('url');
         });
     }
 
@@ -24,7 +27,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('links', function (Blueprint $table) {
-            $table->dropMorphs(Directory::class);
+            $table->dropConstrainedForeignId('directory_id');
         });
     }
 };

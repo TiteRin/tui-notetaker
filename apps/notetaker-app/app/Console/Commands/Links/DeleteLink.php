@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Console\Commands\Links;
 
 use App\Models\Link;
@@ -32,6 +31,11 @@ class DeleteLink extends Command
 
         if (!$link) {
             $this->error("Link not found.");
+            return Command::FAILURE;
+        }
+
+        if ($link->reviews()->exists()) {
+            $this->error('Cannot delete a link that has reviews.');
             return Command::FAILURE;
         }
 

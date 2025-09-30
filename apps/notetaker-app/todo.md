@@ -9,19 +9,25 @@
 
 # URL Value Object
 - [x] Create a ValueObject representing a URL
-- [x] Move the validation and tests 
+- [x] Move the validation and tests
 - [x] Link will use the URL Object
 - [x] Create a URLCast I guess ?
 
 # CLI 
-- [x] Add a Link : php notetaker-app links:add [url]
+- [x] Add a Link : php notetaker-app links:add [url] --directory [directory]
 - [x] List links : php notetaker-app links:list
-- [x] Delete links : php notetaker-app links:rm [id|url]
+- [x] Delete links : php notetaker-app links:delete [id]
 - [x] Add a link with a directory : php notetaker-app links:add [url] --directory [directory]
 - [ ] Move a Link from a directory to another one : php notetake-app links:move [id] --directory [directory]
 - [x] List Directory : php notetaker-app directories:list
-- [ ] List Links for a Directory : php notetaker-app links:list --directory [directory]
+- [ ] List Links for a Directory : php notetaker-app links:list --directory [directory] 
 - [ ] Remove empty directories : php notetaker-app directories:prune
+- [x] Add a Review to a Link: php notetaker-app reviews:add {review} --link {linkId}
+- [x] List reviews for a Link: php notetaker-app links:reviews {linkId}
+- [x] List reviews for a Directory (grouped by Link): php notetaker-app directory:reviews {directoryId}
+- [x] Edit a Review: php notetaker-app reviews:edit {reviewId} {review}
+- [x] Delete a Review: php notetaker-app reviews:delete {reviewId}
+
 
 # Directory
 - [x] A Directory should have a name
@@ -30,10 +36,17 @@
 - [x] You should be able to create a Directory
 - [x] You should be able to rename a Directory
 - [x] You should be able to delete an empty Directory
-- [ ] You shouldn’t be able to delete a non empty Directory
-- [ ] You should be able to add a Link to a Directory
-- [ ] You should be able to create a Link and a Directory in the same command
+- [x] You shouldn’t be able to delete a non empty Directory
+- [x] You should be able to add a Link to a Directory
+- [x] You should be able to create a Link and a Directory in the same command
 - [ ] You should be able to edit a Link to change its Directory
-- [ ] You should be able to fetch the Links from a Directory
+- [x] You should be able to fetch the Links from a Directory
 
 # Reviews
+- [x] A Review has a content
+- [x] A Review belongs to a Link
+- [x] Guard: Can’t delete a Link if it has Reviews
+- [ ] Add confirmation prompt before deleting a review.
+- [ ] Validate non-empty content when editing a review.
+- [ ] Paginate or limit review listing outputs when large.
+- [ ] Allow searching/filtering reviews by keywords.

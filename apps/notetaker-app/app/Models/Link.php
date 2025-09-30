@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use ApiPlatform\Metadata\ApiResource;
@@ -8,6 +7,7 @@ use Database\Factories\LinkFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[ApiResource]
 class Link extends Model
@@ -34,5 +34,10 @@ class Link extends Model
     public function directory(): BelongsTo
     {
         return $this->belongsTo(Directory::class);
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
     }
 }
