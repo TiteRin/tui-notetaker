@@ -19,6 +19,8 @@ class LinkFactory extends Factory
     {
         return [
             'url' => fake()->url(),
+            'title' => fake()->sentence(),
+            'slug' => fake()->slug()
         ];
     }
 }

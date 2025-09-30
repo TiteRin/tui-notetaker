@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use ApiPlatform\Metadata\ApiResource;
@@ -8,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 #[ApiResource]
 class Link extends Model
@@ -15,11 +18,27 @@ class Link extends Model
     /** @use HasFactory<LinkFactory> */
     use HasFactory;
 
-    protected $fillable = ['url', 'directory'];
+    protected $fillable = ['url', 'title', 'directory_id'];
 
     protected $casts = [
         'url' => UrlCast::class,
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::saving(function ($instance) {
+            if (!$instance->title) {
+                $instance->title = self::fetchTitleFromUrl((string)$instance->url);
+                $instance->slug = self::generateUniqueSlug($instance->title);
+            }
+
+            if (!$instance->slug) {
+                $instance->slug = self::generateUniqueSlug($instance->title);
+            }
+        });
+    }
 
     public function getId()
     {
@@ -39,5 +58,41 @@ class Link extends Model
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
+    }
+
+    public static function findByIdOrSlug(string $identifier): ?self
+    {
+        if (ctype_digit($identifier)) {
+            return static::find((int)$identifier);
+        }
+        return static::where('slug', $identifier)->first();
+    }
+
+    public static function generateUniqueSlug(?string $title): ?string
+    {
+        if (!$title) return null;
+        $base = Str::slug($title);
+        if ($base === '') return null;
+        $slug = $base;
+        $i = 1;
+        while (static::where('slug', $slug)->exists()) {
+            $slug = $base . '-' . (++$i);
+        }
+        return $slug;
+    }
+
+    public static function fetchTitleFromUrl(string $url): ?string
+    {
+        try {
+            $response = file_get_contents($url);
+            $matches = [];
+            if (!preg_match('/<title>(.*?)<\/title>/', $response, $matches)) {
+                return null;
+            }
+            return $matches[1];
+        }
+        catch(Exception $e) {
+            return null;
+        }
     }
 }

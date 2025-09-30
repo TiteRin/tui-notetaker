@@ -12,7 +12,7 @@ class DeleteLink extends Command
      *
      * @var string
      */
-    protected $signature = 'links:delete {id}';
+    protected $signature = 'links:delete {idOrSlug}';
 
     /**
      * The console command description.
@@ -26,8 +26,8 @@ class DeleteLink extends Command
      */
     public function handle(): int
     {
-        $id = $this->argument('id');
-        $link = Link::find($id);
+        $identifier = (string) $this->argument('idOrSlug');
+        $link = Link::findByIdOrSlug($identifier);
 
         if (!$link) {
             $this->error("Link not found.");

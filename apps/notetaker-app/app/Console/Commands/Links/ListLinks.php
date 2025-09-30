@@ -29,7 +29,7 @@ class ListLinks extends Command
     {
         $this->info("Listing links");
 
-        $links = Link::all();
+        $links = Link::with('directory')->get();
 
         if ($links->isEmpty()) {
             $this->info("No links found");
@@ -40,9 +40,16 @@ class ListLinks extends Command
         $this->info("{$links->count()} $linkStr found");
 
         $this->table(
-            ['ID', 'Url'],
+            ['ID', 'Title', 'Url', 'Slug', 'Directory', 'Created At'],
             $links->map(function ($link) {
-                return [$link->id, $link->url];
+                return [
+                    $link->id,
+                    $link->title ?? '',
+                    (string)$link->url,
+                    $link->slug ?? '',
+                    $link->directory ? $link->directory->getIconAndName() : '',
+                    optional($link->created_at)->toDateTimeString(),
+                ];
             })
         );
         return Command::SUCCESS;

@@ -7,13 +7,13 @@ use Illuminate\Console\Command;
 
 class ListLinkReviews extends Command
 {
-    protected $signature = 'links:reviews {linkId}';
+    protected $signature = 'links:reviews {idOrSlug}';
 
     protected $description = 'List reviews for a link';
 
     public function handle(): int
     {
-        $link = Link::find($this->argument('linkId'));
+        $link = Link::findByIdOrSlug((string)$this->argument('idOrSlug'));
         if (!$link) {
             $this->error('Link not found.');
             return Command::FAILURE;

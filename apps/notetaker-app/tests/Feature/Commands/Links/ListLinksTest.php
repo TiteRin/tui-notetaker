@@ -2,8 +2,10 @@
 
 namespace Tests\Feature\Commands\Links;
 
+use App\Models\Directory;
 use App\Models\Link;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\DateFactory;
 
 uses(RefreshDatabase::class);
 
@@ -26,17 +28,34 @@ describe("List links", function () {
             ->assertSuccessful();
     });
 
-    it("should return an array of links", function () {
-        Link::factory()->forDirectory(['name' => 'Folder'])->create(["url" => "https://google.com"]);
-        Link::factory()->forDirectory(['name' => 'Folder'])->create(["url" => "https://example.com"]);
-        Link::factory()->forDirectory(['name' => 'Folder'])->create(["url" => "https://localhost"]);
+    it("should return an array of links with all columns", function () {
+        $directory = Directory::factory()->create();
+        $dateTime = fake()->dateTime();
+        Link::factory()->for($directory)->create([
+            "url" => "https://google.com",
+            'title' => 'Google',
+            'slug' => 'google',
+            'created_at' => $dateTime
+        ]);
+        Link::factory()->for($directory)->create([
+            "url" => "https://google.com",
+            'title' => 'Google',
+            'slug' => 'google-2',
+            'created_at' => $dateTime
+        ]);
+        Link::factory()->for($directory)->create([
+            "url" => "https://example.com",
+            'title' => 'Example',
+            'slug' => 'example',
+            'created_at' => $dateTime
+        ]);
 
         $this->artisan("links:list")
             ->expectsTable(
-                ["ID", "Url"], [
-                [1, "https://google.com"],
-                [2, "https://example.com"],
-                [3, "https://localhost"],
+                ["ID", "Title", "Url", "Slug", "Directory", "Created At"], [
+                [1, 'Google', 'https://google.com', 'google', $directory->getIconAndName(), $dateTime->format("Y-m-d H:i:s")],
+                [2, 'Google', 'https://google.com', 'google-2', $directory->getIconAndName(), $dateTime->format("Y-m-d H:i:s")],
+                [3, 'Example', 'https://example.com', 'example', $directory->getIconAndName(), $dateTime->format("Y-m-d H:i:s")]
             ])
             ->assertSuccessful();
     });

@@ -7,6 +7,7 @@ use App\Models\Link;
 use App\ValueObjects\Url;
 use Exception;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Http;
 
 class AddLink extends Command
 {
@@ -15,7 +16,7 @@ class AddLink extends Command
      *
      * @var string
      */
-    protected $signature = 'links:add {url} {--D|directory=}';
+    protected $signature = 'links:add {url} {--D|directory=} {--title=}';
 
     /**
      * The console command description.
@@ -32,6 +33,7 @@ class AddLink extends Command
         try {
             $url = new Url($this->argument('url'));
             $directory = $this->option('directory');
+            $title = $this->option('title');
 
             if (!$directory) {
                 $this->error("Missing directory, use -D or --directory to assign the link to a directory.");
@@ -40,8 +42,16 @@ class AddLink extends Command
 
             $directory = Directory::firstOrCreate(['name' => $directory]);
 
+            if (!$title) {
+                $title = Link::fetchTitleFromUrl((string)$url) ?? null;
+            }
+
+            $slug = Link::generateUniqueSlug($title);
+
             $link = new Link();
             $link->url = $url;
+            $link->title = $title;
+            $link->slug = $slug; // assigned but not fillable; set directly
             $link->directory()->associate($directory);
             $link->save();
         }
