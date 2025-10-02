@@ -3,36 +3,21 @@
 namespace App\Console\Commands\Reviews;
 
 use App\Models\Quote;
-use App\Models\Review;
-use Illuminate\Console\Command;
 
-class AddReviewToQuote extends Command
+class AddReviewToQuote extends AddReviewCommand
 {
     protected $signature = 'quotes:review {quoteId} {review}';
 
     protected $description = 'Add a review to a quote (polymorphic)';
 
-    public function handle(): int
+    public function getReviewAssociate(): ?Quote
     {
-        $quoteId = (int)$this->argument('quoteId');
-        $content = (string)$this->argument('review');
+        $quoteId = $this->argument('quoteId');
+        return Quote::find($quoteId);
+    }
 
-        if (trim($content) === '') {
-            $this->error('Review content cannot be empty.');
-            return Command::FAILURE;
-        }
-
-        $quote = Quote::find($quoteId);
-        if (!$quote) {
-            $this->error('Quote not found.');
-            return Command::FAILURE;
-        }
-
-        $review = new Review(['content' => $content]);
-        $review->reviewable()->associate($quote);
-        $review->save();
-
-        $this->info("A new review [$review->id] has been added to the quote [$quote->id].");
-        return Command::SUCCESS;
+    public function getReviewAssociateType(): string
+    {
+        return "quote";
     }
 }
