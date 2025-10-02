@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Link;
+use App\Models\Directory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Link>
+ * @extends Factory<Directory>
  */
-class LinkFactory extends Factory
+class DirectoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,9 +18,7 @@ class LinkFactory extends Factory
     public function definition(): array
     {
         return [
-            'url' => fake()->url(),
-            'title' => fake()->sentence(),
-            'slug' => fake()->slug()
+            'name' => $this->faker->word(),
         ];
     }
 }
