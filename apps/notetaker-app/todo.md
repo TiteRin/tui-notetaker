@@ -28,9 +28,12 @@
 - [x] Delete a Review: php notetaker-app reviews:delete [reviewId]
 - [x] Add a Quote to a Link : links:quote [linkId] [quote]
 - [x] Add a Review to a Quote : quotes:review [quoteId] [quote]
+- [·] Print a Link report : links:print [linkId]
 - [ ] Move a Link from a directory to another one : php notetake-app links:edit [id] [--set-directory [directory]]
 - [ ] List Links for a Directory : php notetaker-app links:list --directory [directory]
 - [ ] Remove empty directories : php notetaker-app directories:prune
+- [ ] Add Review to the last Link : links:review --last [quote]
+- [ ] Add Review to the last Quote : quotes:review --last [quote]
 
 # Directory
 - [x] A Directory should have a name
