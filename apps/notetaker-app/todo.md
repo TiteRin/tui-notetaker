@@ -6,6 +6,8 @@
 - [x] You should be able to delete a Link
 - [x] A Link should belongs to a Directory
 - [ ] A Directory shouldn’t have two Links with the same URL
+- [ ] You can print a detail of a Link
+- [ ] You can export a detail of a Link
 
 # URL Value Object
 - [x] Create a ValueObject representing a URL
@@ -17,18 +19,18 @@
 - [x] Add a Link : php notetaker-app links:add [url] --directory [directory]
 - [x] List links : php notetaker-app links:list
 - [x] Delete links : php notetaker-app links:delete [id]
-- [x] Add a link with a directory : php notetaker-app links:add [url] --directory [directory]
-- [ ] Move a Link from a directory to another one : php notetake-app links:move [id] --directory [directory]
-- [x] Edit a Link, modifying its url or its title: php notetatker-app links:edit [id] [--set-title] [--set-url]
+- [x] Edit a Link, modifying its url or its title: php notetatker-app links:edit [id] {--set-title} {--set-url}
 - [x] List Directory : php notetaker-app directories:list
-- [ ] List Links for a Directory : php notetaker-app links:list --directory [directory] 
+- [x] Add a Review to a Link: php notetaker-app links:quote [linkId] [review]
+- [x] List reviews for a Link: php notetaker-app links:reviews [linkId]
+- [x] List reviews for a Directory (grouped by Link): php notetaker-app directory:reviews [directoryId]
+- [x] Edit a Review: php notetaker-app reviews:edit [reviewId] [review]
+- [x] Delete a Review: php notetaker-app reviews:delete [reviewId]
+- [·] Add a Quote to a Link : links:quote [linkId] [quote]
+- [·] Add a Review to a Quote : quotes:review [quoteId] [quote]
+- [ ] Move a Link from a directory to another one : php notetake-app links:edit [id] [--set-directory [directory]]
+- [ ] List Links for a Directory : php notetaker-app links:list --directory [directory]
 - [ ] Remove empty directories : php notetaker-app directories:prune
-- [x] Add a Review to a Link: php notetaker-app reviews:add {review} --link {linkId}
-- [x] List reviews for a Link: php notetaker-app links:reviews {linkId}
-- [x] List reviews for a Directory (grouped by Link): php notetaker-app directory:reviews {directoryId}
-- [x] Edit a Review: php notetaker-app reviews:edit {reviewId} {review}
-- [x] Delete a Review: php notetaker-app reviews:delete {reviewId}
-
 
 # Directory
 - [x] A Directory should have a name
@@ -43,10 +45,20 @@
 - [ ] You should be able to edit a Link to change its Directory
 - [x] You should be able to fetch the Links from a Directory
 
+# Quote
+A Quote is something a bit like a Review, it’s something you add to a Link, but it means it’s from the source material. 
+- [x] A Quote has a content
+- [x] A Quote can have an author
+- [ ] A Quote can have a color
+- [x] A Quote belongs to a Link
+- [x] A Quote can have many Reviews
+- [ ] You can delete a Quote without Reviews
+- [ ] You can’t delete a Quote with Reviews
+
 # Reviews
 - [x] A Review has a content
-- [x] A Review belongs to a Link
-- [x] Guard: Can’t delete a Link if it has Reviews
+- [x] A Review is polymorphic (can belong to Link or Quote)
+- [x] Guard: Can’t delete a Link if it has Reviews (including quotes’ reviews)
 - [ ] Add confirmation prompt before deleting a review.
 - [ ] Validate non-empty content when editing a review.
 - [ ] Paginate or limit review listing outputs when large.

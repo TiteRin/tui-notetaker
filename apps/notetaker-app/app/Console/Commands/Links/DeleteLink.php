@@ -34,7 +34,12 @@ class DeleteLink extends Command
             return Command::FAILURE;
         }
 
-        if ($link->reviews()->exists()) {
+        // Guard: cannot delete if it has direct reviews or reviews on its quotes
+        $hasDirect = $link->reviews()->exists();
+        $quoteIds = $link->quotes()->pluck('id');
+        $hasQuoteReviews = \App\Models\Review::where('reviewable_type', \App\Models\Quote::class)
+            ->whereIn('reviewable_id', $quoteIds)->exists();
+        if ($hasDirect || $hasQuoteReviews) {
             $this->error('Cannot delete a link that has reviews.');
             return Command::FAILURE;
         }

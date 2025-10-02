@@ -14,7 +14,8 @@ describe('Deleting a link that has reviews', function () {
         $link = Link::factory()->for($directory)->create(['url' => 'https://d.com']);
         \DB::table('reviews')->insert([
             'content' => 'Keep',
-            'link_id' => $link->id,
+            'reviewable_type' => \App\Models\Link::class,
+            'reviewable_id' => $link->id,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

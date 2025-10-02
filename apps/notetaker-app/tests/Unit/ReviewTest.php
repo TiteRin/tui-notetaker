@@ -15,23 +15,21 @@ describe('When creating a review', function () {
     it('should throw an exception when the content is null', function () {
         $directory = Directory::factory()->create();
         $link = Link::factory()->for($directory)->create();
-        Review::create(['content' => null, 'link_id' => $link->id]);
+        Review::create(['content' => null, 'reviewable_type' => \App\Models\Link::class, 'reviewable_id' => $link->id]);
     })->throws(Exception::class);
 
     it('should create a review with content and link', function () {
         $directory = Directory::factory()->create();
         $link = Link::factory()->for($directory)->create(['url' => 'https://example.com']);
 
-        $review = Review::create(['content' => 'Great link', 'link_id' => $link->id]);
+        $review = Review::create(['content' => 'Great link', 'reviewable_type' => \App\Models\Link::class, 'reviewable_id' => $link->id]);
 
         expect($review)
             ->toBeInstanceOf(Review::class)
             ->and($review->id)->toBeOne()
-            ->and($review->content)->toBe('Great link')
-            ->and($review->link)->toBeInstanceOf(Link::class)
-            ->and($review->link->id)->toBe($link->id);
+            ->and($review->content)->toBe('Great link');
 
-        // Link side
+        // Link side (direct reviews)
         expect($link->reviews()->count())->toBe(1);
     });
 });
@@ -40,7 +38,7 @@ describe('Updating a review', function () {
     beforeEach(function () {
         $this->directory = Directory::factory()->create();
         $this->link = Link::factory()->for($this->directory)->create();
-        $this->review = Review::factory()->for($this->link)->create(['content' => 'Old content']);
+        $this->review = Review::factory()->for($this->link, 'reviewable')->create(['content' => 'Old content']);
     });
 
     it('should be possible to update review content', function () {
@@ -55,7 +53,7 @@ describe('Deleting a review', function () {
     it('should be possible to delete a review', function () {
         $directory = Directory::factory()->create();
         $link = Link::factory()->for($directory)->create();
-        $review = Review::factory()->for($link)->create();
+        $review = Review::factory()->for($link, 'reviewable')->create();
 
         expect(Review::count())->toBe(1);
         $review->delete();

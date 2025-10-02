@@ -9,16 +9,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('quotes', function (Blueprint $table) {
             $table->id();
             $table->text('content');
-            $table->morphs('reviewable');
+            $table->string('author')->nullable();
+            $table->foreignIdFor(Link::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('quotes');
     }
 };

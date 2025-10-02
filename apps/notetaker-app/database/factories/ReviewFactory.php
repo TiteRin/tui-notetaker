@@ -17,7 +17,6 @@ class ReviewFactory extends Factory
     {
         return [
             'content' => $this->faker->sentence(),
-            'link_id' => Link::factory(),
         ];
     }
 }

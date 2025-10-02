@@ -55,9 +55,14 @@ class Link extends Model
         return $this->belongsTo(Directory::class);
     }
 
-    public function reviews(): HasMany
+    public function reviews()
     {
-        return $this->hasMany(Review::class);
+        return $this->morphMany(Review::class, 'reviewable');
+    }
+
+    public function quotes(): HasMany
+    {
+        return $this->hasMany(Quote::class);
     }
 
     public static function findByIdOrSlug(string $identifier): ?self

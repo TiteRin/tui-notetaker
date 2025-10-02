@@ -24,8 +24,8 @@ describe('List reviews for a Link and a Directory', function () {
     it('links:reviews should list reviews for a link', function () {
         // create reviews
         \DB::table('reviews')->insert([
-            ['content' => 'Nice', 'link_id' => $this->link1->id, 'created_at' => now(), 'updated_at' => now()],
-            ['content' => 'Great', 'link_id' => $this->link1->id, 'created_at' => now(), 'updated_at' => now()],
+            ['content' => 'Nice', 'reviewable_type' => \App\Models\Link::class, 'reviewable_id' => $this->link1->id, 'created_at' => now(), 'updated_at' => now()],
+            ['content' => 'Great', 'reviewable_type' => \App\Models\Link::class, 'reviewable_id' => $this->link1->id, 'created_at' => now(), 'updated_at' => now()],
         ]);
 
         $this->artisan("links:reviews {$this->link1->id}")
@@ -38,9 +38,9 @@ describe('List reviews for a Link and a Directory', function () {
 
     it('directory:reviews should group reviews by link', function () {
         \DB::table('reviews')->insert([
-            ['content' => 'L1 A', 'link_id' => $this->link1->id, 'created_at' => now(), 'updated_at' => now()],
-            ['content' => 'L1 B', 'link_id' => $this->link1->id, 'created_at' => now(), 'updated_at' => now()],
-            ['content' => 'L2 A', 'link_id' => $this->link2->id, 'created_at' => now(), 'updated_at' => now()],
+            ['content' => 'L1 A', 'reviewable_type' => \App\Models\Link::class, 'reviewable_id' => $this->link1->id, 'created_at' => now(), 'updated_at' => now()],
+            ['content' => 'L1 B', 'reviewable_type' => \App\Models\Link::class, 'reviewable_id' => $this->link1->id, 'created_at' => now(), 'updated_at' => now()],
+            ['content' => 'L2 A', 'reviewable_type' => \App\Models\Link::class, 'reviewable_id' => $this->link2->id, 'created_at' => now(), 'updated_at' => now()],
         ]);
 
         $this->artisan("directory:reviews {$this->directory->id}")

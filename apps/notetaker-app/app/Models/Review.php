@@ -10,10 +10,10 @@ class Review extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['content', 'link_id'];
+    protected $guarded = [];
 
-    public function link(): BelongsTo
+    public function reviewable()
     {
-        return $this->belongsTo(Link::class);
+        return $this->morphTo();
     }
 }

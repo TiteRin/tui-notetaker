@@ -22,13 +22,15 @@ class ListDirectoryReviews extends Command
 
         $this->info("Directory [{$directory->id}] {$directory->getIconAndName()}");
 
-        $links = $directory->links()->with('reviews:id,content,link_id')->get();
+        $links = $directory->links()->with(['reviews:id,content,reviewable_id,reviewable_type', 'quotes.reviews:id,content,reviewable_id,reviewable_type'])->get();
 
         foreach ($links as $link) {
-            $count = $link->reviews->count();
-            $label = Str::plural('review', $count, prependCount: true);
+            $directCount = $link->reviews->count();
+            $quoteReviewCount = optional($link->quotes)->reduce(function($carry, $q){ return $carry + $q->reviews->count(); }, 0);
+            $total = $directCount + $quoteReviewCount;
+            $label = Str::plural('review', $total, prependCount: true);
             $this->info("Link [{$link->id}] {$link->url} - $label");
-            if ($count > 0) {
+            if ($directCount > 0) {
                 $this->table(['ID','Content'], $link->reviews->map(fn($r) => [(string)$r->id, $r->content]));
             }
         }

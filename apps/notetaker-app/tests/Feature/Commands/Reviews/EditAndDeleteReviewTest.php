@@ -16,7 +16,8 @@ describe('Edit and Delete a review', function () {
         \DB::table('reviews')->insert([
             'id' => 1,
             'content' => 'Old',
-            'link_id' => $this->link->id,
+            'reviewable_type' => \App\Models\Link::class,
+                        'reviewable_id' => $this->link->id,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
