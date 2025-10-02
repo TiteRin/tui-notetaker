@@ -53,14 +53,13 @@ class DeleteLink extends Command
 
         try {
             $link->delete();
-            $this->info("Link deleted.");
-            return Command::SUCCESS;
         }
         catch (\Exception $e) {
             $this->error($e->getMessage());
             return Command::FAILURE;
         }
 
+        $this->info("Link deleted.");
         return Command::SUCCESS;
     }
 }

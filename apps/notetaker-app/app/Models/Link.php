@@ -5,6 +5,7 @@ namespace App\Models;
 use ApiPlatform\Metadata\ApiResource;
 use App\Casts\UrlCast;
 use Database\Factories\LinkFactory;
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -95,8 +96,7 @@ class Link extends Model
                 return null;
             }
             return $matches[1];
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             return null;
         }
     }
