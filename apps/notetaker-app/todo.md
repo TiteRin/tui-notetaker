@@ -26,8 +26,8 @@
 - [x] List reviews for a Directory (grouped by Link): php notetaker-app directory:reviews [directoryId]
 - [x] Edit a Review: php notetaker-app reviews:edit [reviewId] [review]
 - [x] Delete a Review: php notetaker-app reviews:delete [reviewId]
-- [·] Add a Quote to a Link : links:quote [linkId] [quote]
-- [·] Add a Review to a Quote : quotes:review [quoteId] [quote]
+- [x] Add a Quote to a Link : links:quote [linkId] [quote]
+- [x] Add a Review to a Quote : quotes:review [quoteId] [quote]
 - [ ] Move a Link from a directory to another one : php notetake-app links:edit [id] [--set-directory [directory]]
 - [ ] List Links for a Directory : php notetaker-app links:list --directory [directory]
 - [ ] Remove empty directories : php notetaker-app directories:prune

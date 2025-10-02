@@ -18,7 +18,7 @@ class AddReviewToQuote extends Command
         $content = (string)$this->argument('review');
 
         if (trim($content) === '') {
-            $this->error('Review content cannot be empty');
+            $this->error('Review content cannot be empty.');
             return Command::FAILURE;
         }
 
@@ -32,7 +32,7 @@ class AddReviewToQuote extends Command
         $review->reviewable()->associate($quote);
         $review->save();
 
-        $this->info("The review [{$review->id}] \"{$content}\" has been added to the quote {$quote->content}");
+        $this->info("A new review [$review->id] has been added to the quote [$quote->id].");
         return Command::SUCCESS;
     }
 }
