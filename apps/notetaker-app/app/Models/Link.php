@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
@@ -41,6 +42,32 @@ class Link extends Model
         });
     }
 
+    public function quotesReviews()
+    {
+        return $this->hasManyThrough(
+            Review::class,
+            Quote::class,
+            'link_id',
+            'reviewable_id',
+            'id',
+            'id'
+        )->where('reviewable_type', Quote::class);
+    }
+
+    public function scopeWithReviewsCount($query)
+    {
+        return $query
+            ->withCount('reviews')
+            ->withCount('quotes')
+            ->withCount('quotesReviews');
+
+    }
+
+    public function getTotalReviewsCountAttribute()
+    {
+        return ($this->reviews_count ?? 0) + ($this->quotes_reviews_count ?? 0);
+    }
+
     public function getId()
     {
         return $this->id;
@@ -56,7 +83,7 @@ class Link extends Model
         return $this->belongsTo(Directory::class);
     }
 
-    public function reviews()
+    public function reviews(): MorphMany
     {
         return $this->morphMany(Review::class, 'reviewable');
     }
