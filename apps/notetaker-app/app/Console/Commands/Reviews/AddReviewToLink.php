@@ -8,7 +8,7 @@ class AddReviewToLink extends AddReviewCommand
 {
     protected $signature = 'links:review {linkId} {review}';
 
-    protected $description = 'Add a review to a link (polymorphic)';
+    protected $description = 'Add a review to a link';
 
 
     public function getReviewAssociate(): ?Link
