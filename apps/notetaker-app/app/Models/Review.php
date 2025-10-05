@@ -13,6 +13,8 @@ class Review extends Model
 
     protected $guarded = [];
 
+    protected $fillable = ['content'];
+
     public function reviewable(): MorphTo
     {
         return $this->morphTo();

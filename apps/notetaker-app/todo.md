@@ -6,7 +6,7 @@
 - [x] You should be able to delete a Link
 - [x] A Link should belongs to a Directory
 - [ ] A Directory shouldn’t have two Links with the same URL
-- [ ] You can print a detail of a Link
+- [x] You can print a detail of a Link
 - [ ] You can export a detail of a Link
 
 # URL Value Object
@@ -28,7 +28,7 @@
 - [x] Delete a Review: php notetaker-app reviews:delete [reviewId]
 - [x] Add a Quote to a Link : links:quote [linkId] [quote]
 - [x] Add a Review to a Quote : quotes:review [quoteId] [quote]
-- [·] Print a Link report : links:print [linkId]
+- [x] Print a Link report : links:print [linkId]
 - [ ] Move a Link from a directory to another one : php notetake-app links:edit [id] [--set-directory [directory]]
 - [ ] List Links for a Directory : php notetaker-app links:list --directory [directory]
 - [ ] Remove empty directories : php notetaker-app directories:prune
@@ -66,3 +66,7 @@ A Quote is something a bit like a Review, it’s something you add to a Link, bu
 - [ ] Validate non-empty content when editing a review.
 - [ ] Paginate or limit review listing outputs when large.
 - [ ] Allow searching/filtering reviews by keywords.
+
+
+# Refactoring
+- [ ] Créer des stratégies pour écrire / exporter les Reviews et les Quotes

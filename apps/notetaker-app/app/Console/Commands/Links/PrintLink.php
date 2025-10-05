@@ -3,6 +3,8 @@
 namespace App\Console\Commands\Links;
 
 use App\Models\Link;
+use App\Models\Quote;
+use App\Models\Review;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -33,53 +35,33 @@ class PrintLink extends Command
         $this->line("$nbQuotes / $nbReviews");
         $this->line("  To add a quote : links:quote $link->id \"Your quote\" (--author=\"Author Name\")");
         $this->line("  To add a review : links:review $link->id \"Your review\"");
+        $this->line('');
 //
-//        // Fetch top-level items (quotes and direct reviews) with created_at
-//        $quotes = $link->quotes()->orderBy('created_at')->get();
-//        $reviews = $link->reviews()->orderBy('created_at')->get();
-//
-//        // Merge and sort by created_at to interleave quotes and reviews
-//        $items = collect();
-//        foreach ($quotes as $q) {
-//            $items->push([
-//                'type' => 'quote',
-//                'created_at' => $q->created_at,
-//                'model' => $q,
-//            ]);
-//        }
-//        foreach ($reviews as $r) {
-//            $items->push([
-//                'type' => 'review',
-//                'created_at' => $r->created_at,
-//                'model' => $r,
-//            ]);
-//        }
-//
-//        /** @var Collection $items */
-//        $items = $items->sortBy('created_at')->values();
-//
-//        if ($items->isEmpty()) {
-//            return Command::SUCCESS;
-//        }
-//
-//        // Print a blank line between each top-level block
-//        foreach ($items as $index => $item) {
-//            // blank line before each block except the first
-//            $this->line('');
-//
-//            if ($item['type'] === 'review') {
-//                $this->line($item['model']->content);
-//            } else { // quote
-//                $quote = $item['model'];
-//                $this->line('> ' . $quote->content);
-//
-//                // Print quote reviews (indented), ordered by created_at
-//                $quoteReviews = $quote->reviews()->orderBy('created_at')->get();
-//                foreach ($quoteReviews as $qr) {
-//                    $this->line('  - ' . $qr->content);
-//                }
-//            }
-//        }
+        // Fetch top-level items (quotes and direct reviews) with created_at
+        $quotes = $link->quotes()->orderBy('created_at')->get();
+        $reviews = $link->reviews()->orderBy('created_at')->get();
+
+        $all = $quotes->concat($reviews)->sortBy('created_at');
+
+        $all->each(function ($item) {
+
+            if (get_class($item) == Quote::class) {
+                $this->info("[Quote $item->id]");
+                $this->line("> $item->content");
+
+                $item->reviews->each(function ($review) {
+                    $this->info("    [Review $review->id]");
+                    $this->line("    - $review->content");
+                });
+            }
+
+            if (get_class($item) == Review::class) {
+                $this->info("[Review $item->id]");
+                $this->line("# $item->content");
+            }
+
+            $this->line('');
+        });
 
         return Command::SUCCESS;
     }
