@@ -15,8 +15,8 @@ class PrintLink extends Command
 
     public function handle(): int
     {
-        $identifier = (string)$this->argument('idOrSlug');
-        $link = Link::findByIdOrSlug($identifier);
+        $identifier = (string) $this->argument('idOrSlug');
+        $link = Link::withReviewsCount()->findByIdOrSlug($identifier)->first();
 
         if (!$link) {
             $this->error('Link not found.');
@@ -26,7 +26,11 @@ class PrintLink extends Command
         $header = "[$link->id] $link->title ($link->url)";
         $this->line($header);
         $this->line(Str::repeat("=", Str::length($header)));
-        $this->line("0 quote / 0 review");
+
+        $nbReviews = Str::plural("review", $link->total_reviews_count, true);
+        $nbQuotes  = Str::plural("quote", $link->quotes_count, true);
+
+        $this->line("$nbQuotes / $nbReviews");
         $this->line("  To add a quote : links:quote $link->id \"Your quote\" (--author=\"Author Name\")");
         $this->line("  To add a review : links:review $link->id \"Your review\"");
 //

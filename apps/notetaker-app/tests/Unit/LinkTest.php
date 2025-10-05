@@ -96,7 +96,7 @@ it("should computes total_reviews_count including link and quote reviews", funct
 
 //    $linkWithCount = Link::withCount('reviews', 'quotes.reviews')->find($link->id);
 
-    $linkWithCount = Link::withReviewsCount()->find($link->id);
+    $linkWithCount = Link::withReviewsCount()->findByIdOrSlug($link->id)->first();
     expect($linkWithCount->reviews_count)->toBe(2)
         ->and($linkWithCount->quotes_count)->toBe(2)
         ->and($linkWithCount->total_reviews_count)->toBe(6);

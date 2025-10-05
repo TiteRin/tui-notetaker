@@ -63,6 +63,26 @@ class Link extends Model
 
     }
 
+    public function scopefindByIdOrSlug($query, string|int $identifier)
+    {
+        if (is_int($identifier)) {
+            return $query->where('id', $identifier);
+        }
+
+        if (ctype_digit($identifier)) {
+            return $query->where('id', (int) $identifier);
+        }
+
+        return $query->where('slug', $identifier);
+    }
+
+    public static function findByIdOrSlug(string|int $identifier): ?self
+    {
+        return static::query()
+            ->findByIdOrSlug($identifier)
+            ->first();
+    }
+
     public function getTotalReviewsCountAttribute()
     {
         return ($this->reviews_count ?? 0) + ($this->quotes_reviews_count ?? 0);
@@ -91,14 +111,6 @@ class Link extends Model
     public function quotes(): HasMany
     {
         return $this->hasMany(Quote::class);
-    }
-
-    public static function findByIdOrSlug(string $identifier): ?self
-    {
-        if (ctype_digit($identifier)) {
-            return static::find((int)$identifier);
-        }
-        return static::where('slug', $identifier)->first();
     }
 
     public static function generateUniqueSlug(?string $title): ?string
