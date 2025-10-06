@@ -1,0 +1,21 @@
+---
+title: "Proof of Concept"
+description: "Construire un binaire unique"
+---
+
+# ✅ Roadmap & Checklist
+- [ ] Construire une API "Hello \{name\}"
+- [ ] Construire un CLI prenant une chaîne de caractère en entrée
+- [ ] Interroger l’API depuis le CLI
+- [ ] Packager avec FrankenPHP
+- [ ] Tester
+
+# Résultats
+Je n’ai pas pu terminer ce PoC car après réflexion, je vais changer d’idée.
+
+Mon projet Laravel sera à la fois le CLI et l’API (qui pourra ensuite être utilisée par un TUI ou un front découplés)
+
+Concernant la création d’un binaire unique, j’ignore si cela sera possible sans avoir à démarrer un serveur php qui ne sera pas nécessaire dans le cadre du CLI.
+Aussi, au niveau des tests, je suis bloquée avec Laravel/Pest car j’ai une erreur 406 dont je ne trouve pas l’origine.
+J’ai testé une branche avec Symfony, les tests fonctionnent mais je dois à la fois passer sur Symfony, PHPUnit, etc. et j’aimerais pour le moment rester sur Laravel et Pest.
+Peut-être que dans le cadre de l’apprentissage, je referai ce projet sous Symfony plus tard :)

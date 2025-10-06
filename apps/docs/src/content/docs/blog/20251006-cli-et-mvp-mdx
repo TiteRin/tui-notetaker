@@ -1,0 +1,47 @@
+---
+title: MVP et CLI
+description: Première phase du projet notetaker-cli
+---
+
+# Un Minimum Viable Project, c’est quoi ?
+Surtout, c’est quoi, pour moi ? Parce que c’est très facile pour moi de m’éparpiller jusqu’à ne plus savoir où aller exactement.
+Mon objectif sur ce MVP, c’était de pouvoir ajouter/éditer des liens, ajouter des citations ou des notes, et de pouvoir les lister, le tout en ligne de commandes.
+
+Alors, je dis Liens, parce que j’ai sélectionné l’élément le plus évident pour débuter le projet. Mais j’aimerais en vrai en faire une Source. Qui aurait un type, des auteurs, etc.
+Simple, on a dit. Simple.
+
+Donc voilà.
+Il me faut des Liens. Ils appartiennent à un Dossier.
+Un Lien peut avoir des Review. Un Lien peut avoir des Citations. Une Citation peut avoir des Reviews aussi.
+Et je veux pouvoir imprimer toute cette prise de notes pour un Lien.
+
+Et rien que ça, ça donne une ToDoList qui grandit rapidement :
+
+# Pourquoi un CLI ?
+CLI pour Command Line Interface.
+
+C’est vrai, quand ça fait 15 ans qu’on fait du développement web, pourquoi ne pas faire une simple interface front ? Surtout que j’adore le front !
+Parce que dans la vraie vie, moi, ce que j’aime, c’est pouvoir le plus possible me passer de la souris. Et pouvoir ainsi utiliser mon clavier dans un terminal, c’est parfait.
+Et ça me permet ainsi de me concentrer vraiment sur la partie métier pour commencer.
+
+# Quelques commandes :
+```bash
+links:add [url] --directory [directory] # Ajouter un lien
+links:review [id] [review] # Ajouter une annotation à un lien
+links:quote [id] [quote] {--author=[author]} # Ajouter une citation
+links:print [id] # Imprimer un rapport pour un lien
+```
+
+# Ce qu’il reste à faire
+- Pouvoir exporter le rapport au format markdown
+- Pouvoir exporter un rapport pour un dossier
+- Ajouter des tags (parce que j’aime bien avoir un tag "toread" par exemple)
+- Pouvoir utiliser le presse-papier (notamment pour les citations)
+
+# Ça a été long, non ?
+Oui, déjà parce que j’avance doucement, sur mon temps libre. Je n’ai pas de deadline particulière, c’est mon projet. Je le fais par plaisir.
+Ensuite parce que j’utilise le TDD ce qui me permet de ne pas trop m’éparpiller, mais qui me demande justement de ralentir pour réfléchir à l’ordre de mes priorités.
+
+# La suite ?
+Idéalement, la suite, ce serait de parvenir à packager le projet pour commencer à avoir un backend, une API, un TUI, un front web
+Sinon, la suite, ce sera tout simplement continuer de travailler sur le CLI.
