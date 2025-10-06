@@ -8,7 +8,7 @@ class AddReviewToQuote extends AddReviewCommand
 {
     protected $signature = 'quotes:review {quoteId} {review}';
 
-    protected $description = 'Add a review to a quote (polymorphic)';
+    protected $description = 'Add a review to a quote';
 
     public function getReviewAssociate(): ?Quote
     {

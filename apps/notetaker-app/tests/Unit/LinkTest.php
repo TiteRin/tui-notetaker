@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\Directory;
 use App\Models\Link;
+use App\Models\Quote;
+use App\Models\Review;
 use Exception;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use InvalidArgumentException;
@@ -77,4 +79,25 @@ describe("When deleting a Link", function () {
         $this->link->delete();
         expect(Link::count())->toBe(0);
     });
+});
+
+it("should computes total_reviews_count including link and quote reviews", function() {
+
+    $link = Link::factory()->for(Directory::factory()->create())->create();
+    Review::factory()->count(2)->for($link, 'reviewable')->create();
+    Review::factory()->count(3)->for(
+        Quote::factory()->for($link)->create(),
+        'reviewable'
+    )->create();
+    Review::factory()->count(1)->for(
+        Quote::factory()->for($link)->create(),
+        'reviewable'
+    )->create();
+
+//    $linkWithCount = Link::withCount('reviews', 'quotes.reviews')->find($link->id);
+
+    $linkWithCount = Link::withReviewsCount()->findByIdOrSlug($link->id)->first();
+    expect($linkWithCount->reviews_count)->toBe(2)
+        ->and($linkWithCount->quotes_count)->toBe(2)
+        ->and($linkWithCount->total_reviews_count)->toBe(6);
 });
