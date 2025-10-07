@@ -1,0 +1,4 @@
+tasks:
+  start:
+    deps: ["core:serve"]
+    command: "echo \"TUI project is ready to be created\""

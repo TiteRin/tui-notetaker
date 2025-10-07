@@ -4,6 +4,8 @@ $schema: './cache/schemas/workspace.json'
 # extends: './shared/workspace.yml'
 
 projects:
-  api: "apps/notetaker-app"
   docs: "apps/docs"
   caddy: "infra/caddy"
+  core: "apps/core"
+  tui: "apps/tui"
+  web: "apps/web" 

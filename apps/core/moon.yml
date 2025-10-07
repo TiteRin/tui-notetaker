@@ -1,0 +1,9 @@
+tasks:
+  serve:
+    command: php artisan serve --port=8000
+    options:
+      persistent: true
+  cli:
+    command: php artisan 
+  test:
+    command: php artisan test

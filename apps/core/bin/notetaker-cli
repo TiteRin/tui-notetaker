@@ -1,0 +1,5 @@
+#!/usr/bin/env php
+<?php
+$artisan = __DIR__ . '/../artisan';
+$args = implode(' ', array_slice($argv, 1));
+passthru("php $artisan $args");

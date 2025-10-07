@@ -1,0 +1,4 @@
+tasks:
+  dev:
+    deps: ["core:serve"]
+    command: "echo \"Web project is ready to be created\""

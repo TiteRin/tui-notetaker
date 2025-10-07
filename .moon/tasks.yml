@@ -1,3 +1,7 @@
 tasks:
   proxy:
     command: "caddy run --config ./Caddyfile --adapter caddyfile"
+  serve:
+    command: "noop"
+  dev:
+    command: "noop"

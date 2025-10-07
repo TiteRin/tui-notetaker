@@ -1,8 +1,8 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "notetaker/core",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Core application for the note taking application.",
     "keywords": [
         "laravel",
         "framework"
@@ -37,6 +37,9 @@
             "Tests\\": "tests/"
         }
     },
+    "bin": [
+        "bin/notetaker-cli"
+    ],
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
